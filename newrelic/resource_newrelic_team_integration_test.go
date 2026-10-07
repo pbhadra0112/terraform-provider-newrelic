@@ -328,18 +328,18 @@ func TestAccNewRelicTeam_EntityDrift(t *testing.T) {
 // It walks through the full customer journey with three distinct entity types
 // in a single team's ownership collection, validating each behaviour in sequence:
 //
-//  Phase 1 — Declare one entity (secondary team) in entities block.
-//  Phase 2 — Inject testEntityGUID out-of-band (no tag) → static drift →
-//             apply removes it; entities.# = 1.
-//  Phase 3 — Tag testEntityGUID with team name; inject into collection again →
-//             classified as discovery → apply does NOT remove it (warning only);
-//             entities.# = 1.
-//  Phase 4 — User takes declarative control: add testEntityGUID to entities block →
-//             "already belongs" treated as success → entities.# = 2.
-//  Phase 5 — Switch to unmanaged → entities.# = 0 in state; collection untouched.
-//  Phase 6 — Switch back to managed with secondary only → "already belongs"
-//             handles secondary still in collection → entities.# = 1.
-//  Phase 7 — PlanOnly idempotency check (plan must be empty).
+//	Phase 1 — Declare one entity (secondary team) in entities block.
+//	Phase 2 — Inject testEntityGUID out-of-band (no tag) → static drift →
+//	           apply removes it; entities.# = 1.
+//	Phase 3 — Tag testEntityGUID with team name; inject into collection again →
+//	           classified as discovery → apply does NOT remove it (warning only);
+//	           entities.# = 1.
+//	Phase 4 — User takes declarative control: add testEntityGUID to entities block →
+//	           "already belongs" treated as success → entities.# = 2.
+//	Phase 5 — Switch to unmanaged → entities.# = 0 in state; collection untouched.
+//	Phase 6 — Switch back to managed with secondary only → "already belongs"
+//	           handles secondary still in collection → entities.# = 1.
+//	Phase 7 — PlanOnly idempotency check (plan must be empty).
 func TestAccNewRelicTeam_FullEntityLifecycle(t *testing.T) {
 	primaryName := fmt.Sprintf("tf-acc-team-full-%s", acctest.RandString(6))
 	secondaryName := fmt.Sprintf("tf-acc-team-fwnd-%s", acctest.RandString(6))
